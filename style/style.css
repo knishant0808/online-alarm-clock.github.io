@@ -1,0 +1,55 @@
+:root {
+    --bs-success-rgb: 71, 222, 152 !important;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: Apple Chancery, cursive;
+}
+
+.btn-info.text-light:hover,
+.btn-info.text-light:focus {
+    background: #000;
+}
+
+#search-suggestion {
+    position: absolute;
+    top: 2.4em;
+    left: 1em;
+    width: 90%;
+    z-index: 9;
+}
+
+.fa.fa-alarm-clock {
+    position: relative;
+    min-width: 1.3em;
+}
+
+.fa.fa-alarm-clock:before {
+    position: absolute;
+    width: 1.25em;
+    top: -0.9em;
+    left: 0;
+}
+
+.blinks {
+    animation: blinker 1s linear infinite;
+    color: red;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+#alarm-list:empty:before {
+    content: 'No Alarm set.';
+}
+
+#alarm-list:empty {
+    text-align: center;
+    color: rgb(214, 214, 214)
+}

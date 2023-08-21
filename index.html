@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Alarm Clock</title>
+    <link rel="stylesheet" href="./style/bootstrap.min.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <script src="./js/bootstrap.min.js"></script>
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient" id="topNavBar">
+        <div class="container">
+            <a class="navbar-brand" href="">
+            Online Alarm Clock
+            </a>
+
+            <div>
+               <a class="navbar-brand" href="https://github.com/knishant0808/first_web_dev" target="_blank">
+            GitHub
+            </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-center">Set New Alarm</h1>
+                <div class="current-time text-center"></div>
+            </div>
+            <div class="card-body">
+                <form id="alarm-form" class="d-flex align-items-center">
+                    <div class="input-group">
+                        <input type="number" id="hour" name="hour" min="1" max="12" class="form-control" required placeholder="HH">
+                        <span class="input-group-text">:</span>
+                        <input type="number" id="minutes" name="minutes" min="0" max="59" class="form-control" required placeholder="MM">
+                        <select id="meridiem" name="meridiem" class="form-select" required>
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Set Alarm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <h1 class="text-center">Alarm List</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="list-group" id="alarm-list">
+                    <!-- Alarms will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
