@@ -18,7 +18,7 @@ Online Alarm Clock is a simple and elegant web application that allows to set, d
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/knishant0808/alarm-clock.git`
+1. Clone the repository: `git clone https://github.com/knishant0808/online-alarm-clock.git`
 2. Open the `index.html` file in your web browser.
 
 ## Usage
