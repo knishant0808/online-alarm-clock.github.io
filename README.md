@@ -1,6 +1,7 @@
 # Web-based Alarm Clock Application
 
 Online Alarm Clock is a simple and elegant web application that allows to set, delete and display alarms using HTML, CSS, JavaScript and Bootstrap.
+Access the Alarm clock [here](https://knishant0808.github.io/online-alarm-clock.github.io/).
 
 ## Features
 
