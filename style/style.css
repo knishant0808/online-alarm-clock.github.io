@@ -1,16 +1,8 @@
-/* :root {
-    --bs-success-rgb: 71, 222, 152 !important;
-} */
-
 html,
 body {
     height: 100%;
     width: 100%;
     font-family: Apple Chancery, cursive;
-}
-
-#alarm-list:empty:before {
-    content: 'No Alarm set.';
 }
 
 #alarm-list:empty {

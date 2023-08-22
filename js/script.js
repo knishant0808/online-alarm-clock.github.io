@@ -129,6 +129,7 @@ function checkAlarm() {
                 alarm.active = false;
             }
         }
+        displayAlarms();
     }
 }
 
