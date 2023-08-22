@@ -6,10 +6,10 @@ const meridiemSelect = document.getElementById("meridiem");
 const alarmList = document.getElementById("alarm-list");
 const currentTime = document.querySelector(".current-time");
 
-// Create an array to store the alarms
+// Array to store the alarms
 let alarms = [];
 
-// Create a function to format the time in 12-hour format
+// Function to format the time
 function formatTime(hour, minutes, meridiem) {
     // Add leading zero to minutes if less than 10
     if (minutes < 10) {
@@ -19,7 +19,7 @@ function formatTime(hour, minutes, meridiem) {
     return hour + ":" + minutes + " " + meridiem;
 }
 
-// Create a function to update the current time display
+// Function to update the current time display
 function updateTime() {
     // Get the current date and time
     let now = new Date();
@@ -41,47 +41,17 @@ function updateTime() {
     if (minutes < 10) {
         minutes = "0" + minutes;
     }
-    // Format the current time and display it
+    // Format the current time
     currentTime.textContent = hour + ":" + minutes + ":" +  seconds + " " + meridiem;
 }
 
-// Create a function to check if any alarm matches the current time
-function checkAlarm() {
-    // Get the current date and time
-    let now = new Date();
-    // Get the current hour, minutes and meridiem
-    let hour = now.getHours();
-    let minutes = now.getMinutes();
-    let meridiem = "AM";
-    if (hour > 12) {
-        hour -= 12;
-        meridiem = "PM";
-    } else if (hour == 0) {
-        hour = 12;
-    }
-    // Loop through the alarms array
-    for (let i = 0; i < alarms.length; i++) {
-        // Get the alarm object at index i
-        let alarm = alarms[i];
-        // Compare the alarm time with the current time
-        if (alarm.hour == hour && alarm.minutes == minutes && alarm.meridiem == meridiem) {
-            // If they match, alert the user and remove the alarm from the array
-            alert("Alarm: " + formatTime(alarm.hour, alarm.minutes, alarm.meridiem));
-            alarms.splice(i, 1);
-            // Update the alarm list display
-            displayAlarms();
-            break;
-        }
-    }
-}
 
-// Create a function to display the alarms in the alarm list
+// Function to display the alarms in the alarm list
 function displayAlarms() {
     // Clear the previous content of the alarm list
     alarmList.innerHTML = "";
     // Loop through the alarms array
     for (let i = 0; i < alarms.length; i++) {
-        // Get the alarm object at index i
         let alarm = alarms[i];
         // Create a list item element for the alarm
         let li = document.createElement("li");
@@ -94,12 +64,10 @@ function displayAlarms() {
         btn.addEventListener("click", function() {
             // Remove the alarm from the array when clicked
             alarms.splice(i, 1);
-            // Update the alarm list display
             displayAlarms();
         });
-        // Append the button to the list item
+        // Append the button and list item to the alarm list
         li.appendChild(btn);
-        // Append the list item to the alarm list
         alarmList.appendChild(li);
     }
 }
@@ -112,7 +80,6 @@ alarmForm.addEventListener("submit", function(event) {
     let hour = parseInt(hourInput.value);
     let minutes = parseInt(minutesInput.value);
     let meridiem = meridiemSelect.value;
-    // Validate the input values
     if (isNaN(hour) || isNaN(minutes) || hour < 1 || hour > 12 || minutes < 0 || minutes > 59) {
         alert("Please enter a valid time.");
         return;
@@ -121,18 +88,49 @@ alarmForm.addEventListener("submit", function(event) {
     let alarm = {
         hour: hour,
         minutes: minutes,
-        meridiem: meridiem
+        meridiem: meridiem,
+        active: true
     };
     // Add the alarm object to the alarms array
     alarms.push(alarm);
     // Update the alarm list display
     displayAlarms();
-    // Reset the form input values
     alarmForm.reset();
 });
 
 // Call the updateTime function every second
 setInterval(updateTime, 1000);
 
-// Call the checkAlarm function every minute
-setInterval(checkAlarm, 1000);
+function checkAlarm() {
+    // Get the current date and time
+    let now = new Date();
+    // Get the current hour, minutes and meridiem
+    let hour = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    let meridiem = "AM";
+    if (hour > 12) {
+        hour -= 12;
+        meridiem = "PM";
+    } else if (hour == 0) {
+        hour = 12;
+    }
+    
+    // Loop through the alarms array
+    for (let i = 0; i < alarms.length; i++) {
+        // Get the alarm object at index i
+        let alarm = alarms[i];
+        
+        // Compare the alarm time with the current time
+        if (alarm.hour == hour && alarm.minutes == minutes && alarm.meridiem == meridiem && seconds == 0) {
+            // If they match, and the alarm is active, alert the user
+            if (alarm.active) {
+                alert("Alarm: " + formatTime(alarm.hour, alarm.minutes, alarm.meridiem));
+                alarm.active = false;
+            }
+        }
+    }
+}
+
+// Call the checkAlarm function every second
+let alarmInterval = setInterval(checkAlarm, 1000);
